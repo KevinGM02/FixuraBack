@@ -26,6 +26,4 @@ public class UsuarioRepository implements IusuarioRepository{
       usuario.getIdDist()
     });
   }
-
-  
 }
