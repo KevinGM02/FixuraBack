@@ -32,12 +32,11 @@ public class UploadImage {
         imagen.setEncodedImage(Base64.getEncoder().encodeToString(IOUtils.toByteArray(file.getInputStream())));
         imagen.setFileName(file.getOriginalFilename());
         int result= iimagenRepository.save(imagen);
-        if(result==1) {
-			return ResponseEntity.ok("imagen subida exitosamente a GitHub.");
-			
-		}else {
+        if(result == 1) {
+            return ResponseEntity.ok("{\"message\": \"Imagen subida exitosamente a GitHub.\"}");
+        } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("error al subir la imagen a GitHub");
+                    .body("{\"error\": \"Error al subir la imagen a GitHub.\"}");
         }
     }
 
