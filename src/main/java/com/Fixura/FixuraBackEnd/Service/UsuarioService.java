@@ -22,5 +22,17 @@ public class UsuarioService implements IusuarioService{
     }
     return row;
   }
+
+  @Override
+  public Usuario login(Usuario usuario) {
+    Usuario usuario2;
+    try {
+      usuario2 = usuarioRepository.login(usuario);
+      System.err.println(usuario2);
+    } catch (Exception e) {
+      throw e;
+    }
+    return usuario2;
+  }
   
 }

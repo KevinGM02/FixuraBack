@@ -1,5 +1,6 @@
 package com.Fixura.FixuraBackEnd.Controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +29,24 @@ public class UsuarioController {
     ){
 
       ServiceResponse serviceResponse = new ServiceResponse();
-      
+
       int result = iusuarioRepository.save(usuario);
       if(result == 1){
         serviceResponse.setMenssage("Usuario registrado correctamente");
       }
 
       return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+  }
+  
+  @PostMapping("/login")
+  public ResponseEntity<Usuario> login(@RequestBody Usuario usuario) {
+      var user = iusuarioRepository.login(usuario);
+
+      if (user != null && user.getContrasenia().equals(usuario.getContrasenia())) {
+        return new ResponseEntity<>(user, HttpStatus.OK);
+      } else {
+          return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+      }
   }
   
 
